@@ -126,6 +126,10 @@ class App {
     document
       .getElementById("meal-form")
       .addEventListener("submit", this._newMeal.bind(this));
+
+    document
+      .getElementById("workout-form")
+      .addEventListener("submit", this._newWorout.bind(this));
   }
 
   _newMeal(e) {
@@ -142,6 +146,25 @@ class App {
 
     const meal = new Meal(name.value, +calories.value);
     this._tracker.addMeal(meal);
+
+    name.value = "";
+    calories.value = "";
+  }
+
+  _newWorout(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("workout-name");
+    const calories = document.getElementById("workout-calories");
+
+    //validate inputs
+    if (name.value === "" || calories.value === "") {
+      alert("Pelase fill in all the fileds");
+      return;
+    }
+
+    const workout = new Workout(name.value, +calories.value);
+    this._tracker.addWorkout(workout);
 
     name.value = "";
     calories.value = "";
